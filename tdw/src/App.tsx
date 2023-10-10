@@ -1,13 +1,17 @@
-import { useState } from 'react'
-//import { QueryClient, QueryClientProvider } from "react-query";
-//import Home from './pages/Home'
-//const queryClient = new QueryClient();
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter } from "react-router-dom";
+import RouterApp from "../router";
+
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <>
-    {/* <QueryClientProvider client={queryClient}>
-      <Home></Home>
-    </QueryClientProvider> */}
+    <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+          <RouterApp />
+      </BrowserRouter>    
+    </QueryClientProvider>
   </>
   )
 }
