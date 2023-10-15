@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./src/pages/Home";
+import Home from "./src/pages/Home/Home";
 // import ErrorPage from "./src/pages/ErrorPage";
 
 const RouterApp = () => {
