@@ -6,6 +6,7 @@ import {
     List,
     ListItem,
     ListItemText,
+    CircularProgress,
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -45,11 +46,11 @@ function randomDescription() {
 
     const lorem = new LoremIpsum({
         sentencesPerParagraph: {
-            max: getRandomNumber(1, 100),
+            max: getRandomNumber(4, 100),
             min: 4
         },
         wordsPerSentence: {
-            max: getRandomNumber(1, 100),
+            max: getRandomNumber(4, 100),
             min: 4
         }
     });
@@ -116,7 +117,12 @@ export default function DogTinderApp() {
     //     }
     // }
     if (isLoading || isFetching) {
-        return <p>Cargando...</p>; // Puedes mostrar un mensaje de carga mientras se está realizando la solicitud
+        return (
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+                <CircularProgress />
+            </Box>
+        );
+        //return <p>Cargando...</p>; // Puedes mostrar un mensaje de carga mientras se está realizando la solicitud
     }
 
     if (isError) {
@@ -124,28 +130,28 @@ export default function DogTinderApp() {
     }
     return (
         <>
-            <Grid container spacing={1}>
-                <Grid item md={4} xs={6}>
-                    <Box sx={{ width: '100%' }}>
+            <Grid container spacing={1} justifyContent="center" alignItems="center" style={{ height: "100vh" }}>
+                <Grid item md={4} xs={12}>
+                    <Box sx={{ display: "block", justifyContent: "center", alignItems: "center", maxWidth: '100vh', maxHeight: '100vh', overflowY: 'auto' }}>
                         {/* COMPONENTE PERRO CANDIDATO */}
                         {< CandidateDog onRefresh={handleRefresh} hook={customHook} dog={customHook.currentDog}></CandidateDog >}
                     </Box>
                 </Grid>
 
                 <Grid item md={4} xs={6}>
-                    <Box sx={{ width: '100%' }}>
+                    <Box sx={{ flexDirection: "column", display: "block", justifyContent: "center", height: "100vh", width: '100%', maxWidth: '100vh', overflowY: 'auto' }}>
                         {/* COMPONENTE PERRO ACEPTADO */}
                         {< DogList hook={customHook} list={customHook.acceptedDogs}></DogList >}
                     </Box>
                 </Grid>
 
                 <Grid item md={4} xs={6}>
-                    <Box sx={{ width: '100%' }}>
+                    <Box sx={{ flexDirection: "column", display: "block", alignItems: "center", height: "100vh", width: '100%', maxWidth: '100vh', overflowY: 'auto' }}>
                         {/* COMPONENTE PERRO RECHAZADO */}
                         {< DogList hook={customHook} list={customHook.rejectedDogs} ></DogList >}
                     </Box>
                 </Grid>
-            </Grid>
+            </Grid >
         </>
     )
 }
