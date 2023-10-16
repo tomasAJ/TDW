@@ -2,3 +2,14 @@
     color: black;
     font-weight: bold;
 }
+
+
+body{
+    background-color: #FAA1AF;
+}
+
+.css-1ri6ub7-MuiPaper-root-MuiCard-root{
+    background-color: #FAE7EC !important;
+    border-radius: 7% !important;
+    margin-bottom: 5%;
+}

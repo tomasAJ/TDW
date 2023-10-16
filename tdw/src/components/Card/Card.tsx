@@ -16,8 +16,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Dog, Hook } from "../../utils/interfaces"
-
+import { Dog, Hook } from "../../utils/interfaces";
+import './Card.css';
 import { useActionData } from 'react-router-dom';
 import { Alert } from '@mui/material';
 interface ExpandMoreProps extends IconButtonProps {
