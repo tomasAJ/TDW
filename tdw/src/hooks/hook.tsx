@@ -6,7 +6,8 @@ const useCustomHook = (handleRefresh: () => void) => {
     const [acceptedDogs, setAcceptedDogs] = useState<Dog[]>([])
     const [rejectedDogs, setRejectedDogs] = useState<Dog[]>([])
     const [currentDog, setCurrentDog] = useState<Dog>()
-
+    const [seleccionado, setSeleccionado] = useState<Dog>()
+    const [description, setDescription] = useState<boolean>(false)
     const like = (dog: Dog) => {
 
         if (!acceptedDogs.includes(dog)) {
@@ -42,7 +43,7 @@ const useCustomHook = (handleRefresh: () => void) => {
     }
 
 
-    return { like, dislike, currentDog, setCurrentDog, acceptedDogs, setAcceptedDogs, rejectedDogs, setRejectedDogs }
+    return { seleccionado, setSeleccionado, description, setDescription, like, dislike, currentDog, setCurrentDog, acceptedDogs, setAcceptedDogs, rejectedDogs, setRejectedDogs }
 
 }
 export default useCustomHook

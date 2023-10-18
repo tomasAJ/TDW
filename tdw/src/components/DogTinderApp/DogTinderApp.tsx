@@ -97,10 +97,12 @@ export default function DogTinderApp() {
             const newDog: Dog = {
                 name: dogName,
                 description: randomDescription(),
-                image: data?.message
+                image: data?.message,
+                enable: false
             }
             // setCurrentDog(newDog)
             customHook.setCurrentDog(newDog)
+
         }
     }, [status, data]);
 

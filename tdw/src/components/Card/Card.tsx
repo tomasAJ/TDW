@@ -20,6 +20,8 @@ import { Dog, Hook } from "../../utils/interfaces"
 
 import { useActionData } from 'react-router-dom';
 import { Alert } from '@mui/material';
+import { DoorFront, HotelOutlined, SettingsEthernet } from '@mui/icons-material';
+import { doWhileStatement, isGenericTypeAnnotation } from '@babel/types';
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
@@ -40,13 +42,29 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 const RecipeReviewCard: React.FC<{ hook: Hook, dog: Dog }> = ({ hook, dog }) => {
     const [expanded, setExpanded] = React.useState(false);
     const [likeIcon, setLikeIcon] = React.useState(false)
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+
+    const handleExpandClick = async () => {
+        hook.setSeleccionado(dog)
+        setExpanded(!expanded)
+        console.log(hook.seleccionado)
     };
     React.useEffect(() => {
-        hook.rejectedDogs.includes(dog) ? (setLikeIcon(false), setExpanded(false)) : (setLikeIcon(true), setExpanded(false))
-        hook.acceptedDogs.includes(dog) ? (setLikeIcon(true), setExpanded(false)) : (setLikeIcon(false), setExpanded(false))
 
+        if (hook.seleccionado !== dog)
+            setExpanded(false)
+        if (hook) {
+            console.log(hook.currentDog?.name, hook.currentDog?.enable)
+            hook.acceptedDogs.map((dog) => console.log(dog.name, dog.enable))
+            hook.rejectedDogs.map((dog) => console.log(dog.name, dog.enable))
+        }
+    }, [hook, dog]);
+
+    React.useEffect(() => {
+        console.log("LIKE/DISLIKE")
+        if (hook) {
+            hook.rejectedDogs.includes(dog) ? (setLikeIcon(false)) : (setLikeIcon(true))
+            hook.acceptedDogs.includes(dog) ? (setLikeIcon(true)) : (setLikeIcon(false))
+        }
     }, [hook.acceptedDogs, hook.rejectedDogs, dog])
 
 
@@ -54,13 +72,14 @@ const RecipeReviewCard: React.FC<{ hook: Hook, dog: Dog }> = ({ hook, dog }) => 
         try {
             if (action === "LIKE") {
                 setLikeIcon(!likeIcon)
-                setExpanded(true)
+                //setExpanded(true)
                 !likeIcon ? await hook.like(dog) : await hook.dislike(dog)
+
 
             }
 
             if (action === "DISLIKE") {
-                setExpanded(false)
+                //setExpanded(false)
                 setLikeIcon(false)
                 await hook.dislike(dog)
             }
